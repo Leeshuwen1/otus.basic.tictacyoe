@@ -1,6 +1,5 @@
 package ru.mulykin.otuc.basic.tictactoy;
 
-import java.sql.SQLOutput;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -21,21 +20,21 @@ public class TicTac {
         while (gameOn) {
             printField();
             getTurnFromConsole(CROSS);
-            if(isWin(CROSS)){
+            if (isWin(CROSS)) {
                 System.out.println(CROSS + " Won");
                 break;
             }
-              if (isGameOver()){
-                  break;
-              }
+            if (isGameOver()) {
+                break;
+            }
 
             printField();
             roboTorn(ZERO);
-            if(isWin(ZERO)){
+            if (isWin(ZERO)) {
                 System.out.println(ZERO + " Won");
                 break;
             }
-            if (isGameOver()){
+            if (isGameOver()) {
                 break;
             }
         }
@@ -43,17 +42,15 @@ public class TicTac {
     }
 
 
-
-
-    public static boolean isWin(char letter ){
+    public static boolean isWin(char letter) {
         return isVerticalFilled(letter) || isHorizontalFilled(letter) || isDiagonalFilled(letter);
     }
-    
-    
-    private static boolean isHorizontalFilled(char letter){
+
+
+    private static boolean isHorizontalFilled(char letter) {
         boolean isFilled = false;
         for (int i = 0; i < 3; i++) {
-            if (gameField[i][0] == letter && gameField[i][1] == letter && gameField[i][2] == letter ){
+            if (gameField[i][0] == letter && gameField[i][1] == letter && gameField[i][2] == letter) {
                 isFilled = true;
 
             }
@@ -61,10 +58,10 @@ public class TicTac {
         return isFilled;
     }
 
-    private static boolean isVerticalFilled(char letter){
+    private static boolean isVerticalFilled(char letter) {
         boolean isFilled = false;
         for (int i = 0; i < 3; i++) {
-            if (gameField[0][i] == letter && gameField[1][i] == letter && gameField[2][i] == letter ){
+            if (gameField[0][i] == letter && gameField[1][i] == letter && gameField[2][i] == letter) {
                 isFilled = true;
 
             }
@@ -72,10 +69,10 @@ public class TicTac {
         return isFilled;
     }
 
-    private static boolean isDiagonalFilled(char letter){
-       return
-               (gameField[0][0] == letter) && (gameField[1][1] == letter) && (gameField[2][2] == letter)
-               || (gameField[0][2] == letter) && (gameField[1][1] == letter) && (gameField[2][0] == letter);
+    private static boolean isDiagonalFilled(char letter) {
+        return
+                (gameField[0][0] == letter) && (gameField[1][1] == letter) && (gameField[2][2] == letter)
+                        || (gameField[0][2] == letter) && (gameField[1][1] == letter) && (gameField[2][0] == letter);
     }
 
     private static void getTurnFromConsole(char letter) {
@@ -84,22 +81,22 @@ public class TicTac {
             int x = scanner.nextInt() - 1;
             System.out.print("Y = ");
             int y = scanner.nextInt() - 1;
-            if ((setLetter(x, y, letter))){
+            if ((setLetter(x, y, letter))) {
                 return;
             }
         }
 
     }
 
-    private static void roboTorn(char letter){
+    private static void roboTorn(char letter) {
         char alienLetter = letter == ZERO ? CROSS : ZERO;
         while (true) {
             // check own win
             for (int i = 0; i < 3; i++) {
                 for (int j = 0; j < 3; j++) {
-                    if(gameField[i][j] == ' '){
+                    if (gameField[i][j] == ' ') {
                         gameField[i][j] = letter;
-                        if(isWin(letter)){
+                        if (isWin(letter)) {
                             gameField[i][j] = letter;
                             return;
                         }
@@ -110,9 +107,9 @@ public class TicTac {
 // check defense (alien win)
             for (int i = 0; i < 3; i++) {
                 for (int j = 0; j < 3; j++) {
-                    if(gameField[i][j] == ' '){
+                    if (gameField[i][j] == ' ') {
                         gameField[i][j] = alienLetter;
-                        if(isWin(alienLetter)){
+                        if (isWin(alienLetter)) {
                             gameField[i][j] = letter;
                             return;
                         }
@@ -124,16 +121,16 @@ public class TicTac {
             int x = random.nextInt(3);
             int y = random.nextInt(3);
 
-            if ((setLetter(x, y, letter))){
+            if ((setLetter(x, y, letter))) {
                 return;
             }
         }
     }
-    
-    private static boolean isGameOver(){
+
+    private static boolean isGameOver() {
         for (int i = 0; i < gameField.length; i++) {
             for (int j = 0; j < gameField.length; j++) {
-                if(gameField[i][j] == ' '){
+                if (gameField[i][j] == ' ') {
                     return false;
                 }
             }
